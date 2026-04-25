@@ -56,3 +56,28 @@ export interface Transaction {
   date: string;
   notes?: string;
 }
+
+export interface PortfolioSnapshot {
+  date: string;
+  totalValue: number;
+  totalCost: number;
+  holdingsCount: number;
+}
+
+export interface RebalanceSuggestion {
+  symbol: string;
+  name: string;
+  currentAllocation: number;
+  targetAllocation: number;
+  action: 'buy' | 'sell' | 'hold';
+  amount: number;
+  reason: string;
+}
+
+export interface Alert {
+  id: string;
+  type: 'info' | 'warning' | 'success' | 'error';
+  message: string;
+  date: string;
+  read: boolean;
+}
