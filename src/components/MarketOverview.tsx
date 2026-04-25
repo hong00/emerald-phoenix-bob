@@ -44,53 +44,6 @@ const MarketOverview = () => {
             volume: Math.floor(Math.random() * 10000000),
             high52w: price * 1.2,
             low52w: price * 0.8,
-            marketCap: price * Math.floor(Math.random() * 100000<dyad-write path="src/components/MarketOverview.tsx" description="Live market data overview with simulated prices">
-"use client";
-
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { TrendingUp, TrendingDown, Activity } from 'lucide-react';
-import type { MarketData } from '@/types/investment';
-
-const WATCHLIST = [
-  { symbol: 'SPY', name: 'S&P 500 ETF' },
-  { symbol: 'QQQ', name: 'Nasdaq ETF' },
-  { symbol: 'BTC', name: 'Bitcoin' },
-  { symbol: 'AAPL', name: 'Apple Inc.' },
-  { symbol: 'MSFT', name: 'Microsoft' },
-  { symbol: 'GOOGL', name: 'Alphabet' },
-];
-
-const generateMockPrice = (symbol: string, basePrice?: number) => {
-  const prices: Record<string, number> = {
-    SPY: 540, QQQ: 470, BTC: 67000, AAPL: 225, MSFT: 430, GOOGL: 175,
-  };
-  const base = basePrice || prices[symbol] || 100;
-  const change = (Math.random() - 0.5) * base * 0.04;
-  return {
-    price: base + change,
-    change,
-    changePercent: (change / base) * 100,
-  };
-};
-
-const MarketOverview = () => {
-  const [marketData, setMarketData] = useState<MarketData[]>([]);
-
-  useEffect(() => {
-    const updatePrices = () => {
-      setMarketData(
-        WATCHLIST.map((w) => {
-          const { price, change, changePercent } = generateMockPrice(w.symbol);
-          return {
-            symbol: w.symbol,
-            price,
-            change,
-            changePercent,
-            volume: Math.floor(Math.random() * 10000000),
-            high52w: price * 1.2,
-            low52w: price * 0.8,
             marketCap: price * Math.floor(Math.random() * 100000000),
             pe: Math.random() * 30 + 10,
             dividend: Math.random() * 3,
